@@ -8,6 +8,7 @@ from scipy.spatial import Voronoi, voronoi_plot_2d
 
 node_x = []
 node_y = []
+device_id = []
 
 def config_reader():
     device_name=""
@@ -20,6 +21,7 @@ def config_reader():
             if l_flag==0:
                 found=re.search("<DEVICE DEFAULT_DEVICE_NAME=\"gNB\" DEVICE_ID=\"(.+?)\" DEVICE_IMAGE=\"(.+?)\" DEVICE_NAME=\"(.+?)\" DEVICE_TYPE=\"LTE_gNB\" INTERFACE_COUNT=\"4\" TYPE=\"GNB\">",line).group(1,2,3)
                 l_flag=1    
+                device_id.append(found[0])
             else:
                 found=re.search("<POS_3D X_OR_LON=\"(.+?)\" Y_OR_LAT=\"(.+?)\" Z=\"(.+?)\"/>",line).group(1,2)
                 if l_flag==1:
@@ -120,6 +122,10 @@ ax.xaxis.set_visible(False)
 for region in regions:
     polygon = vertices[region]
     plt.fill(*zip(*polygon), alpha=0.4)
+
+for i in range(0,np.size(node_x)):
+    plt.text(node_x[i]+25,node_y[i]+50,device_id[i],fontsize = 8)
+
 
 plt.scatter(points[:,0], points[:,1],color = 'black',s=6)
 plt.xlim(0, vor.max_bound[0] + 600)
