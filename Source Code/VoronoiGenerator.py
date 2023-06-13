@@ -124,7 +124,7 @@ for region in regions:
     plt.fill(*zip(*polygon), alpha=0.4)
 
 for i in range(0,np.size(node_x)):
-    plt.text(node_x[i]+25,node_y[i]+50,device_id[i],fontsize = 8)
+    plt.text(node_x[i]+10,node_y[i]+25,device_id[i],fontsize = 8)
 
 
 plt.scatter(points[:,0], points[:,1],color = 'black',s=6)
