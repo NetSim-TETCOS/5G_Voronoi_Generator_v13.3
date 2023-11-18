@@ -111,7 +111,7 @@ if not (os.path.isfile(tracepath)):
 
 config_reader()
 points = np.column_stack((node_x, node_y))  
-vor = Voronoi(points)
+vor = Voronoi(points, qhull_options='QJ')
 fig, ax = plt.subplots(figsize=(8, 8),num="Voronoi Tesselation")
 # Plot Voronoi regions with colors
 voronoi_plot_2d(vor, ax=ax.twiny(), show_vertices=False, line_colors='k', line_width=0.5, point_size=0)
